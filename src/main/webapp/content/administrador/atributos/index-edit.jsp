@@ -12,23 +12,24 @@
 	<script type="text/javascript" charset="utf8" src="${pageContext.request.contextPath}/resources/scripts/validaciones.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/scripts/jquery.caret.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/scripts/jquery.atwho.js"></script>
-	<script type="text/javascript" charset="utf8" src="${pageContext.request.contextPath}/content/editor/glosario/js/index-editNew.js"></script>	
+	<script type="text/javascript" charset="utf8" src="${pageContext.request.contextPath}/content/administrador/atributos/js/index-edit.js"></script>	
 ]]>
 
 </head>
 <body>
 
-	<h1>Registrar Término del Glosario</h1>
+	<h1>Modificar Atributo</h1>
 
 	<s:actionmessage theme="jquery" />
 	<s:actionerror theme="jquery" />
 	<br />
 
 	<p class="instrucciones">Ingrese la información solicitada.</p>
-	<s:form autocomplete="off" id="frmActor" theme="simple"
-		action="%{#pageContext.request.contextPath}/glosario" method="post">
+	<s:form autocomplete="off" id="frmTermino" theme="simple"
+		action="%{#pageContext.request.contextPath}/atributos/%{idSel}" method="post">
+		<s:hidden name="_method" value="put" />
 		<div class="formulario">
-			<div class="tituloFormulario">Información general del Término</div>
+			<div class="tituloFormulario">Información general del Atributo</div>
 			<table class="seccion">
 				<tr>
 					<td class="label obligatorio"><s:text name="labelNombre" /></td>
@@ -38,10 +39,11 @@
 							theme="jquery" /></td>
 				</tr>
 				<tr>
-					<td class="label obligatorio"><s:text name="labelDescripcion" /></td>
-					<td><s:textarea name="model.descripcion" maxlength="999"
-							cssErrorClass="input-error" cssClass="inputFormulario ui-widget" />
-						<s:fielderror fieldName ="model.descripcion" cssClass="error"
+					<td class="label obligatorio"><s:text name="labelTipoDato" /></td>
+					<td><s:select name="idTipoDato" list="listTipoDato" value="idTipoDato" headerValue="Seleccione" headerKey="-1"
+							listValue="nombre" listKey="id" 
+							cssErrorClass="select-error" cssClass="inputFormulario ui-widget" />
+						<s:fielderror fieldName ="idTipoDato" cssClass="error"
 							theme="jquery" /></td>
 				</tr>
 			</table>
@@ -51,11 +53,11 @@
 		<div align="center">
 			<s:submit class="boton" value="Aceptar" />
 
-			<s:url var="urlGestionarGlosario"
-				value="%{#pageContext.request.contextPath}/glosario">
+			<s:url var="urlGestion"
+				value="%{#pageContext.request.contextPath}/atributos">
 			</s:url>
 			<input class="boton" type="button"
-				onclick="location.href='${urlGestionarGlosario}'"
+				onclick="location.href='${urlGestion}'"
 				value="Cancelar" />
 		</div>
 	</s:form>

@@ -4,8 +4,13 @@ package mx.prowad.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -19,6 +24,7 @@ public class Atributo implements java.io.Serializable {
 
 	private Integer id;
 	private String nombre;
+	private TipoDato tipoDato;
 
 	public Atributo() {
 	}
@@ -46,5 +52,17 @@ public class Atributo implements java.io.Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "TipoDatoid", referencedColumnName = "id")
+	public TipoDato getTipoDato() {
+		return tipoDato;
+	}
+
+	public void setTipoDato(TipoDato tipoDato) {
+		this.tipoDato = tipoDato;
+	}
+	
+	
 
 }

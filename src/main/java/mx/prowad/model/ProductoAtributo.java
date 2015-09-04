@@ -24,25 +24,22 @@ public class ProductoAtributo implements java.io.Serializable {
 	private Integer valorEntero;
 	private Date valorFecha;
 	private Double valorFlotante;
-	private int tipoDatoid;
+	
 
 	public ProductoAtributo() {
 	}
 
 	public ProductoAtributo(ProductoAtributoId id, int tipoDatoid) {
 		this.id = id;
-		this.tipoDatoid = tipoDatoid;
 	}
 
 	public ProductoAtributo(ProductoAtributoId id, String valorCadena,
-			Integer valorEntero, Date valorFecha, Double valorFlotante,
-			int tipoDatoid) {
+			Integer valorEntero, Date valorFecha, Double valorFlotante) {
 		this.id = id;
 		this.valorCadena = valorCadena;
 		this.valorEntero = valorEntero;
 		this.valorFecha = valorFecha;
 		this.valorFlotante = valorFlotante;
-		this.tipoDatoid = tipoDatoid;
 	}
 
 	@EmbeddedId
@@ -93,14 +90,4 @@ public class ProductoAtributo implements java.io.Serializable {
 	public void setValorFlotante(Double valorFlotante) {
 		this.valorFlotante = valorFlotante;
 	}
-
-	@Column(name = "TipoDatoid", nullable = false)
-	public int getTipoDatoid() {
-		return this.tipoDatoid;
-	}
-
-	public void setTipoDatoid(int tipoDatoid) {
-		this.tipoDatoid = tipoDatoid;
-	}
-
 }

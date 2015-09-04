@@ -10,6 +10,18 @@
   <property name="hibernate.current_session_context_class">thread</property>
   <property name="hibernate.enable_lazy_load_no_trans">true</property>
   <property name="show_sql">false</property>
-  <mapping class="mx.prisma.admin.model.Colaborador"/>
+  <mapping class="mx.prowad.model.Atributo"/>
+  <mapping class="mx.prowad.model.Carrito"/>
+  <mapping class="mx.prowad.model.Categoria"/>
+  <mapping class="mx.prowad.model.CategoriaAtributo"/>
+  <mapping class="mx.prowad.model.Estado"/>
+  <mapping class="mx.prowad.model.Producto"/>
+  <mapping class="mx.prowad.model.ProductoAtributo"/>
+  <mapping class="mx.prowad.model.ProductoCarrito"/>
+  <mapping class="mx.prowad.model.ProductoCategoria"/>
+  <mapping class="mx.prowad.model.Rol"/>
+  <mapping class="mx.prowad.model.Tienda"/>
+  <mapping class="mx.prowad.model.TipoDato"/>
+  <mapping class="mx.prowad.model.Usuario"/>
  </session-factory>
 </hibernate-configuration>
