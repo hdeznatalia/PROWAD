@@ -4,7 +4,10 @@ package mx.prowad.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -15,40 +18,39 @@ import javax.persistence.Table;
 public class Usuario implements java.io.Serializable {
 
 	private String curp;
-	private int tiendaid;
 	private String nombre;
 	private String primerApellido;
 	private String segundoApellido;
 	private String correoElectronico;
 	private String contrasena;
-	private int rolid;
+	private Rol rol;
+	private Tienda tienda;
 
 	public Usuario() {
 	}
 
-	public Usuario(String curp, int tiendaid, String nombre,
-			String primerApellido, String correoElectronico, String contrasena,
-			int rolid) {
+	public Usuario(String curp, Tienda tienda, String nombre,
+			String primerApellido, String correoElectronico, String contrasena, Rol rol) {
 		this.curp = curp;
-		this.tiendaid = tiendaid;
 		this.nombre = nombre;
 		this.primerApellido = primerApellido;
 		this.correoElectronico = correoElectronico;
 		this.contrasena = contrasena;
-		this.rolid = rolid;
+		this.tienda = tienda;
+		this.rol = rol;
 	}
 
-	public Usuario(String curp, int tiendaid, String nombre,
+	public Usuario(String curp, Tienda tienda, String nombre,
 			String primerApellido, String segundoApellido,
-			String correoElectronico, String contrasena, int rolid) {
+			String correoElectronico, String contrasena, Rol rol) {
 		this.curp = curp;
-		this.tiendaid = tiendaid;
 		this.nombre = nombre;
 		this.primerApellido = primerApellido;
 		this.segundoApellido = segundoApellido;
 		this.correoElectronico = correoElectronico;
 		this.contrasena = contrasena;
-		this.rolid = rolid;
+		this.tienda = tienda;
+		this.rol = rol;
 	}
 
 	@Id
@@ -59,15 +61,6 @@ public class Usuario implements java.io.Serializable {
 
 	public void setCurp(String curp) {
 		this.curp = curp;
-	}
-
-	@Column(name = "Tiendaid", nullable = false)
-	public int getTiendaid() {
-		return this.tiendaid;
-	}
-
-	public void setTiendaid(int tiendaid) {
-		this.tiendaid = tiendaid;
 	}
 
 	@Column(name = "Nombre", nullable = false, length = 50)
@@ -115,13 +108,26 @@ public class Usuario implements java.io.Serializable {
 		this.contrasena = contrasena;
 	}
 
-	@Column(name = "Rolid", nullable = false)
-	public int getRolid() {
-		return this.rolid;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "Rolid", referencedColumnName = "id")
+	public Rol getRol() {
+		return rol;
 	}
 
-	public void setRolid(int rolid) {
-		this.rolid = rolid;
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "Tiendaid", referencedColumnName = "id")
+	public Tienda getTienda() {
+		return tienda;
+	}
+
+	public void setTienda(Tienda tienda) {
+		this.tienda = tienda;
+	}
+	
+	
 
 }
