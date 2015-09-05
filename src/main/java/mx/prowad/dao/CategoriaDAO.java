@@ -3,6 +3,7 @@ package mx.prowad.dao;
 import java.util.ArrayList;
 
 import mx.prowad.model.Categoria;
+import mx.prowad.model.CategoriaAtributo;
 import mx.prowad.util.HibernateUtil;
 
 import org.hibernate.HibernateException;
@@ -47,6 +48,13 @@ public class CategoriaDAO {
 
 		try {
 			session.beginTransaction();
+			Query query1 = session.createQuery("DELETE FROM CategoriaAtributo WHERE id.categoria.id = :id");
+			query1.setParameter("id", categoria.getId());
+			query1.executeUpdate();
+			
+			for (CategoriaAtributo ca : categoria.getCategoriasAtributo()) {
+				session.saveOrUpdate(ca);
+			}
 			session.update(categoria);
 			session.getTransaction().commit();
 		} catch (HibernateException he) {

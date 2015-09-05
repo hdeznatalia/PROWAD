@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.JDBCException;
+
 import mx.prowad.dao.AtributoDAO;
 import mx.prowad.dao.CategoriaDAO;
 import mx.prowad.model.Atributo;
@@ -42,9 +44,19 @@ public class CategoriaBs {
 		//Faltan validaciones
 	}
 
-	public static void eliminarCategoria(Categoria model) {
-		new CategoriaDAO().eliminarCategoria(model);
-		
+	public static void eliminarCategoria(Categoria model) throws Exception {
+		try {
+			new CategoriaDAO().eliminarCategoria(model);
+		} catch (JDBCException je) {
+			if(je.getErrorCode() == 1451) {
+				throw new PROWADException(
+						"No se puede eliminar la categoría.",
+						"MSG14");
+			}
+			System.out.println("ERROR CODE " + je.getErrorCode());
+			je.printStackTrace();
+			throw new Exception();
+		}
 	}
 
 	public static void modificarCategoria(Categoria model) {

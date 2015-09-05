@@ -2,6 +2,8 @@ package mx.prowad.bs;
 
 import java.util.List;
 
+import org.hibernate.JDBCException;
+
 import mx.prowad.dao.AtributoDAO;
 import mx.prowad.dao.TipoDatoDAO;
 import mx.prowad.model.Atributo;
@@ -54,8 +56,19 @@ public class AtributoBs {
 		return tiposDato;
 	}
 
-	public static void eliminarAtributo(Atributo model) {
-		new AtributoDAO().eliminarAtributo(model);
+	public static void eliminarAtributo(Atributo model) throws Exception {
+		try {
+			new AtributoDAO().eliminarAtributo(model);
+		} catch (JDBCException je) {
+			if(je.getErrorCode() == 1451) {
+				throw new PROWADException(
+						"No se puede eliminar el atributo.",
+						"MSG14");
+			}
+			System.out.println("ERROR CODE " + je.getErrorCode());
+			je.printStackTrace();
+			throw new Exception();
+		}
 		
 	}
 

@@ -43,6 +43,7 @@
 		<div class="formulario">
 			<div class="tituloFormulario">Atributos</div>
 			<div class="seccion">
+				<p class="instrucciones">A continuación se muestran los atributos registrados.</p>
 				<table id="tablaAtributoBD" class="tablaGestion" cellspacing="0" width="100%">
 					<thead>
 						<tr>
@@ -55,6 +56,7 @@
 			</div>
 			<br/>
 			<div class="seccion">
+				<p class="instrucciones">A continuación se muestran los atributos asociados a la Categoría.</p>
 				<table id="tablaAtributoModel" class="tablaGestion" cellspacing="0" width="100%">
 					<thead>
 						<tr>
@@ -72,7 +74,7 @@
 			<s:submit class="boton" value="Aceptar" />
 
 			<s:url var="urlGestion"
-				value="%{#pageContext.request.contextPath}/atributos">
+				value="%{#pageContext.request.contextPath}/categorias">
 			</s:url>
 			<input class="boton" type="button"
 				onclick="location.href='${urlGestion}'"

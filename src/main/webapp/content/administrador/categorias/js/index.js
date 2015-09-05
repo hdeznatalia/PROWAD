@@ -15,7 +15,7 @@ function cancelarConfirmarEliminacion() {
 
 function mostrarMensajeEliminacion(id) {
 	
-	var urlEliminar = contextPath + "/atributos/" +id+ "?_method=delete";	
+	var urlEliminar = contextPath + "/categorias/" +id+ "?_method=delete";	
 	document.getElementById("btnConfirmarEliminacion").onclick = function(){ confirmarEliminacion(urlEliminar);};
 	$('#confirmarEliminacionDialog').dialog('open');
 	return false;
