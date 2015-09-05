@@ -2,6 +2,7 @@ package mx.prowad.dao;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import mx.prowad.model.Atributo;
 import mx.prowad.util.HibernateUtil;
@@ -88,5 +89,27 @@ public class AtributoDAO {
 		}
 
 		return results;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Atributo consultarAtributo(String nombre) {
+		List<Atributo> results = null;
+
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from Atributo where nombre = :nombre");
+			query.setParameter("nombre", nombre);
+			results = query.list();
+			session.getTransaction().commit();
+		} catch (HibernateException he) {
+			he.printStackTrace();
+			session.getTransaction().rollback();
+			throw he;
+		}
+		if (results.isEmpty()) {
+			return null;
+		} else
+			return results.get(0);
+		
 	}
 }

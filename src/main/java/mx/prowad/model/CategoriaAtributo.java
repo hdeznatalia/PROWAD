@@ -25,6 +25,10 @@ public class CategoriaAtributo implements java.io.Serializable {
 		this.id = id;
 	}
 
+	public CategoriaAtributo(Categoria categoria, Atributo atributo) {
+		id = new CategoriaAtributoId(atributo, categoria);
+	}
+
 	@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "atributoid", column = @Column(name = "Atributoid", nullable = false)),

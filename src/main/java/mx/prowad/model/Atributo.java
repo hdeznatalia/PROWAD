@@ -2,12 +2,16 @@ package mx.prowad.model;
 
 // Generated 01-sep-2015 17:22:12 by Hibernate Tools 4.0.0
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -25,6 +29,7 @@ public class Atributo implements java.io.Serializable {
 	private Integer id;
 	private String nombre;
 	private TipoDato tipoDato;
+	private Set<CategoriaAtributo> categoriasAtributo = new HashSet<CategoriaAtributo>(0);
 
 	public Atributo() {
 	}
@@ -62,7 +67,15 @@ public class Atributo implements java.io.Serializable {
 	public void setTipoDato(TipoDato tipoDato) {
 		this.tipoDato = tipoDato;
 	}
-	
-	
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "id.atributo")
+	public Set<CategoriaAtributo> getCategoriasAtributo() {
+		return categoriasAtributo;
+	}
+
+	public void setCategoriasAtributo(Set<CategoriaAtributo> categoriasAtributo) {
+		this.categoriasAtributo = categoriasAtributo;
+	}
+	
+	
 }

@@ -6,46 +6,65 @@
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 	<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Actor</title>
+<title>Categorías</title>
 <![CDATA[
 	<script type="text/javascript" charset="utf8" src="${pageContext.request.contextPath}/resources/scripts/constructores.js"></script>
 	<script type="text/javascript" charset="utf8" src="${pageContext.request.contextPath}/resources/scripts/validaciones.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/scripts/jquery.caret.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/scripts/jquery.atwho.js"></script>
-	<script type="text/javascript" charset="utf8" src="${pageContext.request.contextPath}/content/administrador/atributos/js/index-editNew.js"></script>	
+	<script type="text/javascript" charset="utf8" src="${pageContext.request.contextPath}/content/administrador/categorias/js/index-editNew.js"></script>	
 ]]>
 
 </head>
 <body>
 
-	<h1>Registrar Atributo</h1>
+	<h1>Registrar Categoría</h1>
 
 	<s:actionmessage theme="jquery" />
 	<s:actionerror theme="jquery" />
 	<br />
 
 	<p class="instrucciones">Ingrese la información solicitada.</p>
-	<s:form autocomplete="off" id="frmAtributo" theme="simple"
-		action="%{#pageContext.request.contextPath}/atributos" method="post">
+	<s:form autocomplete="off" id="frmCategoria" theme="simple"
+		action="%{#pageContext.request.contextPath}/categorias" method="post" onsubmit="return prepararEnvio()">
 		<div class="formulario">
-			<div class="tituloFormulario">Información general del Atributo</div>
+			<div class="tituloFormulario">Información general de la Categoría</div>
 			<table class="seccion">
 				<tr>
 					<td class="label obligatorio"><s:text name="labelNombre" /></td>
-					<td><s:textfield name="model.nombre" maxlength="200"
+					<td><s:textfield name="model.nombre" maxlength="255"
 							cssErrorClass="input-error" cssClass="inputFormulario ui-widget" />
 						<s:fielderror fieldName ="model.nombre" cssClass="error"
 							theme="jquery" /></td>
 				</tr>
-				<tr>
-					<td class="label obligatorio"><s:text name="labelTipoDato" /></td>
-					<td><s:select name="idTipoDato" list="listTipoDato" value="idTipoDato" headerValue="Seleccione" headerKey="-1"
-							listValue="nombre" listKey="id" 
-							cssErrorClass="select-error" cssClass="inputFormulario ui-widget" />
-						<s:fielderror fieldName ="idTipoDato" cssClass="error"
-							theme="jquery" /></td>
-				</tr>
 			</table>
+		</div>
+		
+		<div class="formulario">
+			<div class="tituloFormulario">Atributos</div>
+			<div class="seccion">
+				<table id="tablaAtributoBD" class="tablaGestion" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th style="width: 40%;"><s:text name="colNombre"/></th>
+							<th style="width: 40%;"><s:text name="colTipoDato"/></th>
+							<th style="width: 20%;"><s:text name="colAcciones"/></th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<br/>
+			<div class="seccion">
+				<table id="tablaAtributoModel" class="tablaGestion" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th style="width: 40%;"><s:text name="colNombre"/></th>
+							<th style="width: 40%;"><s:text name="colTipoDato"/></th>
+							<th style="width: 20%;"><s:text name="colAcciones"/></th>
+						</tr>
+					</thead>
+				</table>
+			</div>
 		</div>
 		
 		<br />
@@ -59,6 +78,10 @@
 				onclick="location.href='${urlGestion}'"
 				value="Cancelar" />
 		</div>
+		<s:hidden id="jsonAtributosBDTabla" name="jsonAtributosBDTabla"
+			value="%{jsonAtributosBDTabla}" />
+		<s:hidden id="jsonAtributosModelTabla" name="jsonAtributosModelTabla"
+			value="%{jsonAtributosModelTabla}" />
 	</s:form>
 </body>
 	</html>

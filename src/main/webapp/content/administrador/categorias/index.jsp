@@ -5,14 +5,14 @@
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 	<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Atributos</title>
+<title>Categorías</title>
 <![CDATA[
-	<script type="text/javascript" charset="utf8" src="${pageContext.request.contextPath}/content/administrador/atributos/js/index.js"></script>
+	<script type="text/javascript" charset="utf8" src="${pageContext.request.contextPath}/content/administrador/categorias/js/index.js"></script>
 ]]>
 </head>
 
 <body>
-	<h1>Gestionar Atributos</h1>
+	<h1>Gestionar Categorías</h1>
 	<s:actionmessage theme="jquery"/>
 	<s:actionerror theme="jquery"/>
 	
@@ -21,23 +21,21 @@
 	<div class="form">
 		<table id="gestion" class="tablaGestion" cellspacing="0" width="100%">
 			<thead>
-				<th style="width: 40%;"><s:text name="colAtributo"/></th>
-				<th style="width: 40%;"><s:text name="colTipoDato"/></th>
+				<th style="width: 40%;"><s:text name="colNombre"/></th>
 				<th style="width: 20%;"><s:text name="colAcciones"/></th>
 			</thead>
 			<tbody>
-			<s:iterator value="atributos" var="atributo">
+			<s:iterator value="categorias" var="categoria">
 				<tr>
-					<td><s:property value="%{#atributo.nombre}"/></td>		
-					<td><s:property value="%{#atributo.tipoDato.nombre}"/></td>
+					<td><s:property value="%{#categoria.nombre}"/></td>
 					<td align="center">
-						<s:url var="urlEditar" value="%{#pageContext.request.contextPath}/atributos/%{#atributo.id}/edit"/>			
+						<s:url var="urlEditar" value="%{#pageContext.request.contextPath}/categorias/%{#categoria.id}/edit"/>			
 						<s:a href="%{urlEditar}">
 							<img id="" class="button" title="Modificar"
 									src="${pageContext.request.contextPath}/resources/images/icons/editar.png" />
 						</s:a>
 						${blanks}
-						<s:a onclick="return mostrarMensajeEliminacion(%{#atributo.id});">
+						<s:a onclick="return mostrarMensajeEliminacion(%{#categoria.id});">
 						<img id="" class="button" title="Eliminar"
 								src="${pageContext.request.contextPath}/resources/images/icons/eliminar.png" /></s:a>		
 					</td>
@@ -51,7 +49,7 @@
 	<br />
 	<div align="center">
 		<button class="boton" formmethod="post"
-			onclick="location.href='${pageContext.request.contextPath}/atributos/new'">
+			onclick="location.href='${pageContext.request.contextPath}/categorias/new'">
 			<s:text name="Registrar"></s:text>
 		</button>
 	</div>

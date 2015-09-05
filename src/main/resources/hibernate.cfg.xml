@@ -9,7 +9,7 @@
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
   <property name="hibernate.current_session_context_class">thread</property>
   <property name="hibernate.enable_lazy_load_no_trans">true</property>
-  <property name="show_sql">false</property>
+  <property name="show_sql">true</property>
   <mapping class="mx.prowad.model.Atributo"/>
   <mapping class="mx.prowad.model.Carrito"/>
   <mapping class="mx.prowad.model.Categoria"/>
