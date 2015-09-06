@@ -17,14 +17,12 @@ import javax.persistence.Table;
 public class ProductoCarrito implements java.io.Serializable {
 
 	private ProductoCarritoId id;
-	private int cantidad;
 
 	public ProductoCarrito() {
 	}
 
-	public ProductoCarrito(ProductoCarritoId id, int cantidad) {
+	public ProductoCarrito(ProductoCarritoId id) {
 		this.id = id;
-		this.cantidad = cantidad;
 	}
 
 	@EmbeddedId
@@ -37,15 +35,6 @@ public class ProductoCarrito implements java.io.Serializable {
 
 	public void setId(ProductoCarritoId id) {
 		this.id = id;
-	}
-
-	@Column(name = "cantidad", nullable = false)
-	public int getCantidad() {
-		return this.cantidad;
-	}
-
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
 	}
 
 }

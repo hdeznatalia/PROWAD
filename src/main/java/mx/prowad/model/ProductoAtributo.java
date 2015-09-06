@@ -3,6 +3,7 @@ package mx.prowad.model;
 // Generated 01-sep-2015 17:22:12 by Hibernate Tools 4.0.0
 
 import java.util.Date;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -27,6 +28,15 @@ public class ProductoAtributo implements java.io.Serializable {
 	
 
 	public ProductoAtributo() {
+	}
+	
+	public ProductoAtributo(Producto producto, Atributo atributo, String valorCadena,
+			Integer valorEntero, Date valorFecha, Double valorFlotante) {
+		this.id = new ProductoAtributoId(producto, atributo);
+		this.valorCadena = valorCadena;
+		this.valorEntero = valorEntero;
+		this.valorFecha = valorFecha;
+		this.valorFlotante = valorFlotante;
 	}
 
 	public ProductoAtributo(ProductoAtributoId id, int tipoDatoid) {
@@ -90,4 +100,5 @@ public class ProductoAtributo implements java.io.Serializable {
 	public void setValorFlotante(Double valorFlotante) {
 		this.valorFlotante = valorFlotante;
 	}
+
 }

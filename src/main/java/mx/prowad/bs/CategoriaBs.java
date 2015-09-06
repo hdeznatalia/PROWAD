@@ -12,12 +12,23 @@ import mx.prowad.dao.CategoriaDAO;
 import mx.prowad.model.Atributo;
 import mx.prowad.model.Categoria;
 import mx.prowad.model.CategoriaAtributo;
+import mx.prowad.model.Producto;
 import mx.prowad.util.PROWADException;
 
 public class CategoriaBs {
 	public static Categoria consultarCategoria(int id) {
 		Categoria categoria = null;
 		categoria = new CategoriaDAO().consultarCategoria(id);
+		if (categoria == null) {
+			throw new PROWADException("No se puede consultar la categoria.",
+					"MSG13");
+		}
+		return categoria;
+	}
+	
+	public static Categoria consultarCategoria(String nombre) {
+		Categoria categoria = null;
+		categoria = new CategoriaDAO().consultarCategoria(nombre);
 		if (categoria == null) {
 			throw new PROWADException("No se puede consultar la categoria.",
 					"MSG13");

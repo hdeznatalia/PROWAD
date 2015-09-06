@@ -10,4 +10,3 @@ INSERT INTO Rol (nombre) VALUES ("Cliente");
 INSERT INTO TipoDato (nombre) VALUES ("Cadena");
 INSERT INTO TipoDato (nombre) VALUES ("Entero");
 INSERT INTO TipoDato (nombre) VALUES ("Flotante");
-INSERT INTO TipoDato (nombre) VALUES ("Fecha");

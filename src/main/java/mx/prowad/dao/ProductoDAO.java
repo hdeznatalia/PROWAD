@@ -1,43 +1,45 @@
 package mx.prowad.dao;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-import mx.prowad.model.Categoria;
 import mx.prowad.model.CategoriaAtributo;
-import mx.prowad.model.Usuario;
+import mx.prowad.model.Producto;
+import mx.prowad.model.ProductoAtributo;
+import mx.prowad.model.ProductoCategoria;
 import mx.prowad.util.HibernateUtil;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-public class CategoriaDAO {
+public class ProductoDAO {
 	protected static Session session = null;
-	public CategoriaDAO() {
+	public ProductoDAO() {
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 	}
 	
-	public Categoria consultarCategoria(int id) {
-		Categoria categoria = null;
+	public Producto consultarProducto(int id) {
+		Producto Producto = null;
 
 		try {
 			session.beginTransaction();
-			categoria = (Categoria) session.get(Categoria.class, id);
+			Producto = (Producto) session.get(Producto.class, id);
 			session.getTransaction().commit();
 		} catch (HibernateException he) {
 			he.printStackTrace();
 			session.getTransaction().rollback();
 			throw he;
 		}
-		return categoria;
+		return Producto;
 
 	}
 	
-	public void registrarCategoria(Categoria categoria) {
+	public void registrarProducto(Producto Producto) {
 		try {
 			session.beginTransaction();
-			session.save(categoria);
+			session.save(Producto);
 			session.getTransaction().commit();
 		} catch (HibernateException he) {
 			he.printStackTrace();
@@ -46,18 +48,26 @@ public class CategoriaDAO {
 		}
 	}
 
-	public void modificarCategoria(Categoria categoria) {
+	public void modificarProducto(Producto producto) {
 
 		try {
 			session.beginTransaction();
-			Query query1 = session.createQuery("DELETE FROM CategoriaAtributo WHERE id.categoria.id = :id");
-			query1.setParameter("id", categoria.getId());
-			query1.executeUpdate();
 			
-			for (CategoriaAtributo ca : categoria.getCategoriasAtributo()) {
-				session.saveOrUpdate(ca);
+			Query query1 = session.createQuery("DELETE FROM ProductoCategoria WHERE id.producto.id = :id");
+			query1.setParameter("id", producto.getId());
+			query1.executeUpdate();
+			for (ProductoCategoria pc : producto.getProductosCategoria()) {
+				session.saveOrUpdate(pc);
 			}
-			session.update(categoria);
+			
+			Query query2 = session.createQuery("DELETE FROM ProductoAtributo WHERE id.producto.id = :id");
+			query2.setParameter("id", producto.getId());
+			query2.executeUpdate();
+			for (ProductoAtributo pa : producto.getProductosAtributo()) {
+				session.saveOrUpdate(pa);
+			}
+			
+			session.update(producto);
 			session.getTransaction().commit();
 		} catch (HibernateException he) {
 			he.printStackTrace();
@@ -66,11 +76,11 @@ public class CategoriaDAO {
 		}
 	}
 	
-	public void eliminarCategoria(Categoria categoria) {
+	public void eliminarProducto(Producto Producto) {
 
 		try {
 			session.beginTransaction();
-			session.delete(categoria);
+			session.delete(Producto);
 			session.getTransaction().commit();
 		} catch (HibernateException he) {
 			he.printStackTrace();
@@ -80,14 +90,14 @@ public class CategoriaDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<Categoria> consultarCategorias() {
-		ArrayList<Categoria> results = null;
+	public ArrayList<Producto> consultarProductos() {
+		ArrayList<Producto> results = null;
 
 		try {
 			session.beginTransaction();
 			Query query = session
-					.createQuery("from Categoria");
-			results = (ArrayList<Categoria>) query.list();
+					.createQuery("from Producto");
+			results = (ArrayList<Producto>) query.list();
 			session.getTransaction().commit();
 
 		} catch (HibernateException he) {
@@ -100,12 +110,12 @@ public class CategoriaDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Categoria consultarCategoria(String nombre) {
-		List<Categoria> results = null;
+	public Producto consultarProducto(String nombre) {
+		List<Producto> results = null;
 
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("from Categoria where nombre = :nombre");
+			Query query = session.createQuery("from Producto where nombre = :nombre");
 			query.setParameter("nombre", nombre);
 			results = query.list();
 			session.getTransaction().commit();
@@ -118,5 +128,6 @@ public class CategoriaDAO {
 			return null;
 		} else
 			return results.get(0);
+		
 	}
 }

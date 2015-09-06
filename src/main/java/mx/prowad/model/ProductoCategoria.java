@@ -20,6 +20,10 @@ public class ProductoCategoria implements java.io.Serializable {
 
 	public ProductoCategoria() {
 	}
+	
+	public ProductoCategoria(Producto producto, Categoria categoria) {
+		this.id = new ProductoCategoriaId(producto, categoria);
+	}
 
 	public ProductoCategoria(ProductoCategoriaId id) {
 		this.id = id;

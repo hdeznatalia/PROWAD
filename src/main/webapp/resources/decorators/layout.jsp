@@ -34,7 +34,7 @@
 <body>
 	<div class="container">
 		<div class="banner"><jsp:include page="/resources/decorators/banner.jsp" /></div>
-		<div class="menuPrincipal"><jsp:include page="/content/administrador/menus/menuSuperior.jsp" /></div>
+		<div class="menuPrincipal"><jsp:include page="/content/prueba/menus/menuSuperior.jsp" /></div>
 		<div class="menuSecundario">
 			<jsp:include page="/resources/decorators/menus/menuSecundario.jsp" />
 		</div>

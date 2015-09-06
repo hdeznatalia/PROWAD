@@ -2,10 +2,20 @@ package mx.prowad.model;
 
 // Generated 01-sep-2015 17:22:12 by Hibernate Tools 4.0.0
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,17 +27,17 @@ import javax.persistence.Table;
 public class Producto implements java.io.Serializable {
 
 	private Integer id;
-	private int tiendaid;
+	private Tienda tienda;
 	private String nombre;
-	private int cantidad;
-
+	private Set<ProductoCategoria> productosCategoria = new HashSet<ProductoCategoria>(0);
+	private Set<ProductoAtributo> productosAtributo = new HashSet<ProductoAtributo>(0);
+	
 	public Producto() {
 	}
 
-	public Producto(int tiendaid, String nombre, int cantidad) {
-		this.tiendaid = tiendaid;
+	public Producto(Tienda tienda, String nombre) {
+		this.tienda = tienda;
 		this.nombre = nombre;
-		this.cantidad = cantidad;
 	}
 
 	@Id
@@ -41,15 +51,6 @@ public class Producto implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "Tiendaid", nullable = false)
-	public int getTiendaid() {
-		return this.tiendaid;
-	}
-
-	public void setTiendaid(int tiendaid) {
-		this.tiendaid = tiendaid;
-	}
-
 	@Column(name = "nombre", nullable = false, length = 50)
 	public String getNombre() {
 		return this.nombre;
@@ -59,13 +60,34 @@ public class Producto implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	@Column(name = "cantidad", nullable = false)
-	public int getCantidad() {
-		return this.cantidad;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "id.producto", cascade = CascadeType.ALL)
+	public Set<ProductoCategoria> getProductosCategoria() {
+		return productosCategoria;
 	}
 
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
+	public void setProductosCategoria(Set<ProductoCategoria> productosCategoria) {
+		this.productosCategoria = productosCategoria;
 	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "Tiendaid", referencedColumnName = "id")
+	public Tienda getTienda() {
+		return tienda;
+	}
+
+	public void setTienda(Tienda tienda) {
+		this.tienda = tienda;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "id.producto", cascade = CascadeType.ALL)
+	public Set<ProductoAtributo> getProductosAtributo() {
+		return productosAtributo;
+	}
+
+	public void setProductosAtributo(Set<ProductoAtributo> productosAtributo) {
+		this.productosAtributo = productosAtributo;
+	}
+	
+	
 
 }
