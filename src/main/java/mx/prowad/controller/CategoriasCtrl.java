@@ -52,8 +52,10 @@ ModelDriven<Categoria>, SessionAware {
 
 		} catch (PROWADException pe) {
 			ErrorManager.agregaMensajeError(this, pe);
+			return ACCESS;
 		} catch (Exception e) {
-			e.printStackTrace();
+			ErrorManager.agregaMensajeError(this, e);
+			return ACCESS;
 		}
 		return INDEX;
 	}

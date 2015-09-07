@@ -16,7 +16,7 @@ import mx.prowad.model.Rol;
 public class UsuarioBs {
 	public static Usuario consultarUsuario(String curp) {
 		Usuario usuario = null;
-		usuario = new UsuarioDAO().consultarUsuario(curp);
+		usuario = new UsuarioDAO().consultarUsuarioCURP(curp);
 		if (usuario == null) {
 			throw new PROWADException("No se puede consultar el usuario.",
 					"MSG13");
@@ -93,5 +93,28 @@ public class UsuarioBs {
 		Rol rolModel = new RolDAO().consultarRol(RolEnum.consultarIdRol(rolEnum));
 		model.setRol(rolModel);
 		
+	}
+	
+	public static boolean esAdministrador(Usuario model) {
+		if (model.getRol().getId() == RolEnum.consultarIdRol(RolEnum.Rol.ADMINISTRADOR)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static boolean esCliente(Usuario model) {
+		if (model.getRol().getId() == RolEnum.consultarIdRol(RolEnum.Rol.CLIENTE)) {
+			return true;
+		} else {
+			return false;
+		}	}
+	
+	public static boolean esAlmacenista(Usuario model) {
+		if (model.getRol().getId() == RolEnum.consultarIdRol(RolEnum.Rol.ALMACENISTA)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

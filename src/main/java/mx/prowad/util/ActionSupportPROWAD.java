@@ -7,9 +7,12 @@ package mx.prowad.util;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+@Results({ @Result(name = ActionSupportPROWAD.ACCESS, type = "redirectAction", location = "access")})
 public class ActionSupportPROWAD extends ActionSupport {
 	/**
 	 * 
@@ -21,10 +24,12 @@ public class ActionSupportPROWAD extends ActionSupport {
 	public static final String EDITNEW = "editNew";
 	protected static final String SHOW = "show";
 	protected static final String DELETE = "delete";
+	protected static final String ACCESS = "access";
 	protected String urlPrev;
 	protected HttpServletRequest request = ServletActionContext.getRequest();
 	public ActionSupportPROWAD() {
 		super();
+		this.clearErrorsAndMessages();
 		try {
 			SessionManager.pushURL(request);
 			urlPrev = SessionManager.popURL(request);

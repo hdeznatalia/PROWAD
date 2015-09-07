@@ -2,12 +2,17 @@ package mx.prowad.model;
 
 // Generated 01-sep-2015 17:22:12 by Hibernate Tools 4.0.0
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +30,7 @@ public class Usuario implements java.io.Serializable {
 	private String contrasena;
 	private Rol rol;
 	private Tienda tienda;
+	private Set<Carrito> carritos = new HashSet<Carrito>(0);
 
 	public Usuario() {
 	}
@@ -126,6 +132,15 @@ public class Usuario implements java.io.Serializable {
 
 	public void setTienda(Tienda tienda) {
 		this.tienda = tienda;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario", cascade = CascadeType.ALL)
+	public Set<Carrito> getCarritos() {
+		return carritos;
+	}
+
+	public void setCarritos(Set<Carrito> carritos) {
+		this.carritos = carritos;
 	}
 	
 	

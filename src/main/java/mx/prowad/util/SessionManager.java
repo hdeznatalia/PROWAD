@@ -7,6 +7,9 @@ import java.util.NoSuchElementException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import mx.prowad.bs.UsuarioBs;
+import mx.prowad.model.Carrito;
+import mx.prowad.model.Usuario;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -120,4 +123,28 @@ public class SessionManager {
 //		System.out.println("pop url: " + urlPrev);
 		return urlPrev;
 	}
+
+	public static Carrito consultarCarritoActivo() throws Exception {
+		Carrito carrito = (Carrito) SessionManager.get("carritoActivo");
+		return carrito;
+	}
+
+	public static Usuario consultarUsuarioActivo() throws Exception {
+		HttpSession session = ServletActionContext.getRequest().getSession(
+				false);
+		Usuario usuario = null;
+		String curp = null;
+		if (session != null && session.getAttribute("curp") != null) {
+			curp = (String) session.getAttribute("curp");
+		}
+
+		usuario = UsuarioBs.consultarUsuario(curp);
+
+		if (usuario == null) {
+			throw new PROWADException("No se puede consultar el usuario",
+					"MSG16");
+		}
+		return usuario;
+	}
+
 }

@@ -29,6 +29,8 @@ public class Producto implements java.io.Serializable {
 	private Integer id;
 	private Tienda tienda;
 	private String nombre;
+	private Double precio;
+	private Integer cantidad;
 	private Set<ProductoCategoria> productosCategoria = new HashSet<ProductoCategoria>(0);
 	private Set<ProductoAtributo> productosAtributo = new HashSet<ProductoAtributo>(0);
 	
@@ -86,6 +88,24 @@ public class Producto implements java.io.Serializable {
 
 	public void setProductosAtributo(Set<ProductoAtributo> productosAtributo) {
 		this.productosAtributo = productosAtributo;
+	}
+	
+	@Column(name = "precio", precision = 22, scale = 0)
+	public Double getPrecio() {
+		return this.precio;
+	}
+
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+
+	@Column(name = "cantidad")
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
 	}
 	
 	

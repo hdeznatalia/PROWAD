@@ -3,11 +3,21 @@ package mx.prowad.model;
 // Generated 01-sep-2015 17:22:12 by Hibernate Tools 4.0.0
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,22 +30,23 @@ import javax.persistence.TemporalType;
 public class Carrito implements java.io.Serializable {
 
 	private Integer id;
-	private String usuariocurp;
 	private Date fechaCompra;
-	private int estadoid;
+	private Estado estado;
+	private Usuario usuario;
+	private Set<ProductoCarrito> productosCarrito = new HashSet<ProductoCarrito>(0);
 
 	public Carrito() {
 	}
 
-	public Carrito(String usuariocurp, int estadoid) {
-		this.usuariocurp = usuariocurp;
-		this.estadoid = estadoid;
+	public Carrito(Usuario usuario, Estado estado) {
+		this.usuario = usuario;
+		this.estado = estado;
 	}
 
-	public Carrito(String usuariocurp, Date fechaCompra, int estadoid) {
-		this.usuariocurp = usuariocurp;
+	public Carrito(Usuario usuario, Date fechaCompra, Estado estado) {
+		this.usuario = usuario;
 		this.fechaCompra = fechaCompra;
-		this.estadoid = estadoid;
+		this.estado = estado;
 	}
 
 	@Id
@@ -49,15 +60,6 @@ public class Carrito implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "Usuariocurp", nullable = false, length = 18)
-	public String getUsuariocurp() {
-		return this.usuariocurp;
-	}
-
-	public void setUsuariocurp(String usuariocurp) {
-		this.usuariocurp = usuariocurp;
-	}
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "FechaCompra", length = 10)
 	public Date getFechaCompra() {
@@ -68,13 +70,35 @@ public class Carrito implements java.io.Serializable {
 		this.fechaCompra = fechaCompra;
 	}
 
-	@Column(name = "Estadoid", nullable = false)
-	public int getEstadoid() {
-		return this.estadoid;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "Estadoid", referencedColumnName = "id")
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setEstadoid(int estadoid) {
-		this.estadoid = estadoid;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "id.carrito", cascade = CascadeType.ALL)
+	public Set<ProductoCarrito> getProductosCarrito() {
+		return productosCarrito;
+	}
+
+	public void setProductosCarrito(Set<ProductoCarrito> productosAtributo) {
+		this.productosCarrito = productosAtributo;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "Usuariocurp", referencedColumnName = "curp")
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	
 
 }

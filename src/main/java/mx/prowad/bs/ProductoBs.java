@@ -23,7 +23,9 @@ import mx.prowad.model.ProductoAtributoId;
 import mx.prowad.model.ProductoCategoria;
 import mx.prowad.model.Tienda;
 import mx.prowad.model.Usuario;
+import mx.prowad.util.JsonUtil;
 import mx.prowad.util.PROWADException;
+import mx.prowad.util.PROWADValidacionException;
 
 public class ProductoBs {
 	public static Producto consultarProducto(int id) {
@@ -132,4 +134,23 @@ public class ProductoBs {
 	public static List<ProductoAtributo> consultarAtributos(Producto model) {
 		return (List<ProductoAtributo>) model.getProductosAtributo();
 	}
+
+	public static void verificarBodega(int cantidadBodega,
+			int cantidadProducto, int cantidadProductoAnterior) {
+		int cantidadTotalBodega = cantidadBodega + cantidadProductoAnterior;
+		
+		if(cantidadProducto > cantidadTotalBodega) {
+			throw new PROWADValidacionException("No hay suficientes productos", "MSG22");
+		}
+		
+	}
+
+	public static void realizarCambioBodega(Producto model, int cantidadBodega,
+			int cantidadProducto, int cantidadProductoAnterior) {
+		int cantidadTotalBodega = cantidadBodega + cantidadProductoAnterior;
+		model.setCantidad(cantidadTotalBodega - cantidadProducto);
+		ProductoBs.modificarProducto(model);
+		
+	}
+
 }

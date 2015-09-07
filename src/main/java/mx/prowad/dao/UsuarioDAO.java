@@ -17,20 +17,25 @@ public class UsuarioDAO {
 		session = HibernateUtil.getSessionFactory().getCurrentSession();
 	}
 	
-	public Usuario consultarUsuario(String id) {
-		Usuario usuario = null;
-
+	public List<Usuario> findByCorreo(String correo) {
+		List<Usuario> usuarios = null;
+		
+		String queryString = "from Usuario usr where usr.correoElectronico = :correo";
+		usuarios = new ArrayList<Usuario>();
+		
 		try {
 			session.beginTransaction();
-			usuario = (Usuario) session.get(Usuario.class, id);
+			Query queryObject = session.createQuery(queryString);
+			queryObject.setParameter("correo", correo);
+			for (Object object : queryObject.list()) {
+				usuarios.add((Usuario) object);
+			}
 			session.getTransaction().commit();
 		} catch (HibernateException he) {
 			he.printStackTrace();
 			session.getTransaction().rollback();
-			throw he;
 		}
-		return usuario;
-
+		return usuarios;
 	}
 	
 	public void registrarUsuario(Usuario usuario) {

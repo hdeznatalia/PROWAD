@@ -1,5 +1,6 @@
 package mx.prowad.util;
 
+
 public class ErrorManager {
 	public static void agregaMensajeError(ActionSupportPROWAD ap, Exception ex) {
 		if(ex instanceof PROWADException) {
@@ -29,7 +30,7 @@ public class ErrorManager {
 		} else {
 			ap.addActionError(ap.getText("MSG13"));
 		}
-		
+		SessionManager.set(ap.getActionErrors(), "mensajesError");
 		System.err.println(ex.getMessage());
 		ex.printStackTrace();
 	}

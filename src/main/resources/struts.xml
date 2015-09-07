@@ -14,6 +14,8 @@
 		respuesta correcta, se utilizará el siguiente mapper -->
 	<constant name="struts.mapper.class" value="rest" />
 	<!-- <constant name="struts.mapper.composite" value="rest,struts" /> -->
+	
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
 
 	<!-- struts2 busca paquetes que terminen, en su nombre, con las siguientes 
 		cadenas en busca de acciones -->
@@ -38,7 +40,7 @@
 
 	<constant name="struts.mapper.idParameterName" value="idSel" />
 
-	<package name="prisma" extends="rest-default,json-default">
+	<package name="prisma" extends="rest-default,json-default,jcaptcha4struts2-default">
 		<interceptors>
 			<interceptor class="mx.prisma.controller.AccessInterceptor" name="loginInterceptor"/>
 			<interceptor name="workflow" class="org.apache.struts2.rest.RestWorkflowInterceptor" />
@@ -48,7 +50,9 @@
 				
 				<!-- Permite el mapeo de una excepción hacia un result code, es recomendado 
 					que sea el primer interceptor -->
-				<interceptor-ref name="exception" />	
+				<interceptor-ref name="exception" />
+				
+				<interceptor-ref name="jcaptchaDefaultStack" />	
 
 				<!-- Establece todas las propiedades de un action basada en las interfaces 
 					que esta implementa. Está diseñado para establecer todas las propiedades 

@@ -37,6 +37,20 @@
 						<s:fielderror fieldName ="model.nombre" cssClass="error"
 							theme="jquery" /></td>
 				</tr>
+				<tr>
+					<td class="label obligatorio"><s:text name="labelCantidad" /></td>
+					<td><s:textfield name="model.cantidad" maxlength="255"
+							cssErrorClass="input-error" cssClass="inputFormulario ui-widget" />
+						<s:fielderror fieldName ="model.cantidad" cssClass="error"
+							theme="jquery" /></td>
+				</tr>
+				<tr>
+					<td class="label obligatorio"><s:text name="labelPrecio" /></td>
+					<td><s:textfield name="model.precio" maxlength="255"
+							cssErrorClass="input-error" cssClass="inputFormulario ui-widget" />
+						<s:fielderror fieldName ="model.precio" cssClass="error"
+							theme="jquery" /></td>
+				</tr>
 			</table>
 		</div>
 		<div class="formulario">

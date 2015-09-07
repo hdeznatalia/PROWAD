@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
-	xmlns:s="/struts-tags" xmlns:sj="/struts-jquery-tags">
+	xmlns:s="/struts-tags" xmlns:sj="/struts-jquery-tags"
+	xmlns:jcaptcha="http://code.google.com/p/jcaptcha4struts2/taglib/2.0">
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 	<html xmlns="http://www.w3.org/1999/xhtml">
@@ -24,7 +25,7 @@
 
 				<tr>
 					<td class="label obligatorio"><s:text name="labelCorreo" /></td>
-					<td><s:textfield name="userName" maxlength="45"
+					<td><s:textfield name="userName" maxlength="50"
 							cssErrorClass="input-error" cssClass="inputFormulario ui-widget" />
 						<s:fielderror fieldName="userName" cssClass="error" theme="jquery" /></td>
 				</tr>
@@ -34,11 +35,22 @@
 							cssErrorClass="input-error" cssClass="inputFormulario ui-widget" />
 						<s:fielderror fieldName="password" cssClass="error" theme="jquery" /></td>
 				</tr>
+				<tr>
+					<td></td>
+					<td>
+					<jcaptcha:image label="Type the text "/>
+ 
+					</td>
+				</tr>
 			</table>
 			<div align="right">
 				<a class="link"
-					href="${pageContext.request.contextPath}/access!recover">Recuperar
-					contraseña</a>
+					href="${pageContext.request.contextPath}/access!recover">Recuperar contraseña</a>
+
+			</div>
+			<div align="right">
+				<a class="link"  formmethod="get"
+					href="${pageContext.request.contextPath}/perfil/new">Registrarse</a>
 
 			</div>
 
