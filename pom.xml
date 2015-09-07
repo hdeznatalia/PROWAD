@@ -3,16 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>mx</groupId>
 	<artifactId>prowad</artifactId>
-	<packaging>pom</packaging>
+	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>prowad Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	<repositories>
-	    <repository>
-	      <id>java.net</id>
-	      <url>http://maven.jahia.org/maven2/</url>
-	    </repository>
-	 </repositories>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<struts.version>2.3.24</struts.version> 
@@ -146,16 +140,12 @@
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>	
-		<dependency>
-			<groupId>com.google.code.jcaptcha4struts2</groupId>
-			<artifactId>jcaptcha4struts2</artifactId>
-			<version>2.0.1</version>
-		</dependency>
+		
 			
 		
 	</dependencies>
 	<build>
-		<finalName>prowad</finalName>
+		<finalName>prisma</finalName>
 	</build>
 	<modules>
 		<module>?</module>
